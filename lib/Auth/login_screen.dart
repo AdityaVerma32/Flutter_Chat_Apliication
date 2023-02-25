@@ -23,16 +23,24 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isAnimated = false;
 
-  handleGoogleSignIn() {
+  _handleGoogleSignIn() {
     Dialogue.showProgressBar(context);
 
-    signInWithGoogle().then((value) {
+    signInWithGoogle().then((value) async {
       if (value != null) {
         Navigator.pop(context);
         log('\nUser: ${value.user}');
         print("\n UserAdittional Information : ${value.additionalUserInfo}");
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => HomeScreen()));
+
+        if (await APIs.userExists()) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => HomeScreen()));
+        } else {
+          APIs.createUser().then((value) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => HomeScreen()));
+          });
+        }
       }
     });
   }
@@ -100,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(), elevation: 1),
                   onPressed: () {
-                    handleGoogleSignIn();
+                    _handleGoogleSignIn();
                   },
                   icon: Image.asset(
                     "assets/Logo/google-logo.png",

@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         title: 'Chat Application',
         theme: ThemeData(
           appBarTheme: AppBarTheme(
+            elevation: 1,
             backgroundColor: Colors.white,
             centerTitle: true,
             iconTheme: IconThemeData(color: Colors.black),
