@@ -17,6 +17,8 @@ dependencies:
   google_sign_in: ^6.0.0
   cloud_firestore: ^4.4.3
   firebase_core: ^2.6.1
+  image_picker: ^0.8.6+3
+  firebase_storage: ^11.0.14
   cached_network_image: ^3.2.3  # provides cache storage of image 
                                 # also provides progress indicator
                                 # also provides no image function 
